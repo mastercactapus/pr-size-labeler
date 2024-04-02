@@ -22,7 +22,7 @@ github::calculate_total_modifications() {
     for file in $(echo "$body" | jq -r '.[] | @base64'); do
       local ignore_file=0
       if [[ ( "$ignore_deleted" == 'true' && "$(jq::base64 '.status')" == 'removed') ]]; then
-        echo "Ignoring deleted file: $(jq::base64 '.filename')"
+        log::message "Ignoring deleted file: $(jq::base64 '.filename')"
         continue
       fi
       for file_to_ignore in $files_to_ignore; do
